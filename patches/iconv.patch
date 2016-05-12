@@ -1,0 +1,21 @@
+diff -Naur SoftEtherVPN_bak/src/Mayaqua/Mayaqua.h SoftEtherVPN/src/Mayaqua/Mayaqua.h
+--- SoftEtherVPN_bak/src/Mayaqua/Mayaqua.h	2016-05-12 09:16:17.025030140 -0600
++++ SoftEtherVPN/src/Mayaqua/Mayaqua.h	2016-05-12 09:16:53.665292561 -0600
+@@ -289,17 +289,7 @@
+ #include <ifaddrs.h>
+ #endif	// MAYAQUA_SUPPORTS_GETIFADDRS
+ 
+-#ifdef	UNIX_LINUX
+-typedef void *iconv_t;
+-iconv_t iconv_open (__const char *__tocode, __const char *__fromcode);
+-size_t iconv (iconv_t __cd, char **__restrict __inbuf,
+-                     size_t *__restrict __inbytesleft,
+-                     char **__restrict __outbuf,
+-                     size_t *__restrict __outbytesleft);
+-int iconv_close (iconv_t __cd);
+-#else	// UNIX_LINUX
+ #include <iconv.h>
+-#endif	// UNIX_LINUX
+ 
+ 
+ 
