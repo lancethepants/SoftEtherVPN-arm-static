@@ -23,9 +23,9 @@ mkdir $SRC
 ######## ####################################################################
 
 mkdir $SRC/zlib && cd $SRC/zlib
-$WGET http://zlib.net/zlib-1.2.8.tar.gz
-tar zxvf zlib-1.2.8.tar.gz
-cd zlib-1.2.8
+$WGET https://zlib.net/zlib-1.2.11.tar.gz
+tar zxvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
@@ -44,9 +44,9 @@ make install DESTDIR=$BASE
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET https://www.openssl.org/source/openssl-1.0.2h.tar.gz
-tar zxvf openssl-1.0.2h.tar.gz
-cd openssl-1.0.2h
+$WGET https://www.openssl.org/source/openssl-1.0.2n.tar.gz
+tar zxvf openssl-1.0.2n.tar.gz
+cd openssl-1.0.2n
 
 ./Configure linux-armv4 -march=armv7-a -mtune=cortex-a9 \
 --prefix=/opt zlib \
@@ -85,9 +85,9 @@ make install DESTDIR=$BASE
 ############### #############################################################
 
 mkdir $SRC/libreadline && cd $SRC/libreadline
-$WGET http://ftp.gnu.org/gnu/readline/readline-6.3.tar.gz
-tar zxvf readline-6.3.tar.gz
-cd readline-6.3
+$WGET http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz
+tar zxvf readline-7.0.tar.gz
+cd readline-7.0
 
 $WGET https://raw.githubusercontent.com/lancethepants/tomatoware/master/patches/readline/readline.patch
 patch < readline.patch
@@ -109,9 +109,9 @@ make install DESTDIR=$BASE
 ############ ################################################################
 
 mkdir $SRC/libiconv && cd $SRC/libiconv
-$WGET http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
-tar zxvf libiconv-1.14.tar.gz
-cd libiconv-1.14
+$WGET http://ftp.gnu.org/gnu/libiconv/libiconv-1.15.tar.gz
+tar zxvf libiconv-1.15.tar.gz
+cd libiconv-1.15
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
