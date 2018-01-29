@@ -1,0 +1,210 @@
+diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_32bit.mak SoftEtherVPN/src/makefiles/freebsd_32bit.mak
+--- SoftEtherVPN.orig/src/makefiles/freebsd_32bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/freebsd_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_64bit.mak SoftEtherVPN/src/makefiles/freebsd_64bit.mak
+--- SoftEtherVPN.orig/src/makefiles/freebsd_64bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/freebsd_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -g -fsigned-char -m64
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -g -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -O2 -fsigned-char -m64
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DBRIDGE_BPF -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -I/usr/include -O2 -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -L/usr/local/lib -L/usr/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/linux_32bit.mak SoftEtherVPN/src/makefiles/linux_32bit.mak
+--- SoftEtherVPN.orig/src/makefiles/linux_32bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/linux_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/linux_64bit.mak SoftEtherVPN/src/makefiles/linux_64bit.mak
+--- SoftEtherVPN.orig/src/makefiles/linux_64bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/linux_64bit.mak	2018-01-29 10:05:10.670631074 -0700
+@@ -31,13 +31,13 @@
+ 	M64:=-m64
+ endif
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(M64)
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(M64) $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(M64)
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(M64) $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/macos_32bit.mak SoftEtherVPN/src/makefiles/macos_32bit.mak
+--- SoftEtherVPN.orig/src/makefiles/macos_32bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/macos_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap
++OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/macos_64bit.mak SoftEtherVPN/src/makefiles/macos_64bit.mak
+--- SoftEtherVPN.orig/src/makefiles/macos_64bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/macos_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap
++OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_MACOS -DBRIDGE_PCAP -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz -lpcap $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_32bit.mak SoftEtherVPN/src/makefiles/openbsd_32bit.mak
+--- SoftEtherVPN.orig/src/makefiles/openbsd_32bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/openbsd_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/local/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_64bit.mak SoftEtherVPN/src/makefiles/openbsd_64bit.mak
+--- SoftEtherVPN.orig/src/makefiles/openbsd_64bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/openbsd_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -g -fsigned-char -m64
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_BSD -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -g -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -O2 -fsigned-char -m64
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_BSD -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -I/usr/local/include -O2 -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -L/usr/local/lib -lm -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/local/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/solaris_32bit.mak SoftEtherVPN/src/makefiles/solaris_32bit.mak
+--- SoftEtherVPN.orig/src/makefiles/solaris_32bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/solaris_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_SOLARIS -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_SOLARIS -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_SOLARIS -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_SOLARIS -DNO_VLAN -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN.orig/src/makefiles/solaris_64bit.mak SoftEtherVPN/src/makefiles/solaris_64bit.mak
+--- SoftEtherVPN.orig/src/makefiles/solaris_64bit.mak	2018-01-29 10:01:02.076940721 -0700
++++ SoftEtherVPN/src/makefiles/solaris_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+@@ -25,13 +25,13 @@
+ 
+ #CC=gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_SOLARIS -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_SOLARIS -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_SOLARIS -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_SOLARIS -DNO_VLAN -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -lrt -lnsl -lsocket -ldl -lpthread -lssl -lcrypto -liconv -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/

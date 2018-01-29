@@ -144,7 +144,7 @@ $MAKE
 
 cd ../SoftEtherVPN
 
-$WGET https://raw.githubusercontent.com/el1n/OpenWRT-package-softether/master/softethervpn/patches/100-ccldflags.patch
+$WGET https://raw.githubusercontent.com/lancethepants/SoftEtherVPN-arm-static/master/patches/100-ccldflags.patch
 $WGET https://raw.githubusercontent.com/lancethepants/SoftEtherVPN-arm-static/master/patches/iconv.patch
 patch -p1 < 100-ccldflags.patch
 patch -p1 < iconv.patch
