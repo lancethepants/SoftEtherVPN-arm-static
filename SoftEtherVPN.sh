@@ -131,10 +131,6 @@ make install DESTDIR=$BASE
 mkdir $SRC/softether && cd $SRC/softether
 git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
 
-cd SoftEtherVPN
-git checkout c0c1b914db8d27fa2f60fb88ee45b032b881aa28
-cd ..
-
 cp -r SoftEtherVPN SoftEtherVPN_host
 cd SoftEtherVPN_host
 
