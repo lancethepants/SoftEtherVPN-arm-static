@@ -1,6 +1,6 @@
-diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_32bit.mak SoftEtherVPN/src/makefiles/freebsd_32bit.mak
---- SoftEtherVPN.orig/src/makefiles/freebsd_32bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/freebsd_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/freebsd_32bit.mak SoftEtherVPN_Stable/src/makefiles/freebsd_32bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/freebsd_32bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/freebsd_32bit.mak	2018-07-17 07:52:57.368852226 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -19,9 +19,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_32bit.mak SoftEtherVPN/src/ma
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_64bit.mak SoftEtherVPN/src/makefiles/freebsd_64bit.mak
---- SoftEtherVPN.orig/src/makefiles/freebsd_64bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/freebsd_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/freebsd_64bit.mak SoftEtherVPN_Stable/src/makefiles/freebsd_64bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/freebsd_64bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/freebsd_64bit.mak	2018-07-17 07:52:57.368852226 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -40,9 +40,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/freebsd_64bit.mak SoftEtherVPN/src/ma
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/linux_32bit.mak SoftEtherVPN/src/makefiles/linux_32bit.mak
---- SoftEtherVPN.orig/src/makefiles/linux_32bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/linux_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/linux_32bit.mak SoftEtherVPN_Stable/src/makefiles/linux_32bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/linux_32bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/linux_32bit.mak	2018-07-17 07:52:57.368852226 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -61,30 +61,29 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/linux_32bit.mak SoftEtherVPN/src/make
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/linux_64bit.mak SoftEtherVPN/src/makefiles/linux_64bit.mak
---- SoftEtherVPN.orig/src/makefiles/linux_64bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/linux_64bit.mak	2018-01-29 10:05:10.670631074 -0700
-@@ -31,13 +31,13 @@
- 	M64:=-m64
- endif
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/linux_64bit.mak SoftEtherVPN_Stable/src/makefiles/linux_64bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/linux_64bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/linux_64bit.mak	2018-07-17 07:59:54.260956329 -0600
+@@ -25,13 +25,13 @@
  
--OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(M64)
-+OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(M64) $(CCFLAGS)
+ #CC=gcc
  
--OPTIONS_LINK_DEBUG=-g -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
-+OPTIONS_LINK_DEBUG=-g -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char -m64 $(CCFLAGS)
  
--OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(M64)
-+OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(M64) $(CCFLAGS)
+ OPTIONS_LINK_DEBUG=-g -fsigned-char -m64 -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
  
--OPTIONS_LINK_RELEASE=-O2 -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
-+OPTIONS_LINK_RELEASE=-O2 -fsigned-char $(M64) -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -DCPU_64 -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char -m64 $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -m64 -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/macos_32bit.mak SoftEtherVPN/src/makefiles/macos_32bit.mak
---- SoftEtherVPN.orig/src/makefiles/macos_32bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/macos_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/macos_32bit.mak SoftEtherVPN_Stable/src/makefiles/macos_32bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/macos_32bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/macos_32bit.mak	2018-07-17 07:52:57.368852226 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -103,9 +102,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/macos_32bit.mak SoftEtherVPN/src/make
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/macos_64bit.mak SoftEtherVPN/src/makefiles/macos_64bit.mak
---- SoftEtherVPN.orig/src/makefiles/macos_64bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/macos_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/macos_64bit.mak SoftEtherVPN_Stable/src/makefiles/macos_64bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/macos_64bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/macos_64bit.mak	2018-07-17 07:52:57.368852226 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -124,9 +123,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/macos_64bit.mak SoftEtherVPN/src/make
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_32bit.mak SoftEtherVPN/src/makefiles/openbsd_32bit.mak
---- SoftEtherVPN.orig/src/makefiles/openbsd_32bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/openbsd_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/openbsd_32bit.mak SoftEtherVPN_Stable/src/makefiles/openbsd_32bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/openbsd_32bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/openbsd_32bit.mak	2018-07-17 07:52:57.372852264 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -145,9 +144,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_32bit.mak SoftEtherVPN/src/ma
  
  INSTALL_BINDIR=/usr/local/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_64bit.mak SoftEtherVPN/src/makefiles/openbsd_64bit.mak
---- SoftEtherVPN.orig/src/makefiles/openbsd_64bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/openbsd_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/openbsd_64bit.mak SoftEtherVPN_Stable/src/makefiles/openbsd_64bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/openbsd_64bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/openbsd_64bit.mak	2018-07-17 07:52:57.372852264 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -166,9 +165,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/openbsd_64bit.mak SoftEtherVPN/src/ma
  
  INSTALL_BINDIR=/usr/local/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/solaris_32bit.mak SoftEtherVPN/src/makefiles/solaris_32bit.mak
---- SoftEtherVPN.orig/src/makefiles/solaris_32bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/solaris_32bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/solaris_32bit.mak SoftEtherVPN_Stable/src/makefiles/solaris_32bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/solaris_32bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/solaris_32bit.mak	2018-07-17 07:52:57.372852264 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
@@ -187,9 +186,9 @@ diff -Naur SoftEtherVPN.orig/src/makefiles/solaris_32bit.mak SoftEtherVPN/src/ma
  
  INSTALL_BINDIR=/usr/bin/
  INSTALL_VPNSERVER_DIR=/usr/vpnserver/
-diff -Naur SoftEtherVPN.orig/src/makefiles/solaris_64bit.mak SoftEtherVPN/src/makefiles/solaris_64bit.mak
---- SoftEtherVPN.orig/src/makefiles/solaris_64bit.mak	2018-01-29 10:01:02.076940721 -0700
-+++ SoftEtherVPN/src/makefiles/solaris_64bit.mak	2018-01-29 10:01:16.209036796 -0700
+diff -Naur SoftEtherVPN_Stable_orig/src/makefiles/solaris_64bit.mak SoftEtherVPN_Stable/src/makefiles/solaris_64bit.mak
+--- SoftEtherVPN_Stable_orig/src/makefiles/solaris_64bit.mak	2018-07-17 07:52:21.752504395 -0600
++++ SoftEtherVPN_Stable/src/makefiles/solaris_64bit.mak	2018-07-17 07:52:57.372852264 -0600
 @@ -25,13 +25,13 @@
  
  #CC=gcc
