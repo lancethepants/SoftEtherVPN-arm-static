@@ -3,7 +3,7 @@
 set -e
 set -x
 
-mkdir ~/softether && cd ~/softether
+mkdir -p ~/softether && cd ~/softether
 
 BASE=`pwd`
 SRC=$BASE/src
@@ -16,7 +16,7 @@ CXXFLAGS=$CFLAGS
 CONFIGURE="./configure --prefix=/opt --host=arm-linux"
 MAKE="make -j`nproc`"
 
-mkdir $SRC
+mkdir -p $SRC
 
 ######## ####################################################################
 # ZLIB # ####################################################################
@@ -129,7 +129,8 @@ make install DESTDIR=$BASE
 ############# ###############################################################
 
 mkdir $SRC/softether && cd $SRC/softether
-git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
+git clone https://github.com/SoftEtherVPN/SoftEtherVPN_Stable.git
+mv SoftEtherVPN_Stable SoftEtherVPN
 
 cp -r SoftEtherVPN SoftEtherVPN_host
 cd SoftEtherVPN_host
