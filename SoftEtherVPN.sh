@@ -44,11 +44,11 @@ make install DESTDIR=$BASE
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET https://www.openssl.org/source/openssl-1.0.2n.tar.gz
-tar zxvf openssl-1.0.2n.tar.gz
-cd openssl-1.0.2n
+$WGET https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+tar zxvf openssl-1.1.1b.tar.gz
+cd openssl-1.1.1b
 
-./Configure linux-armv4 -march=armv7-a -mtune=cortex-a9 \
+./Configure no-shared linux-armv4 -march=armv7-a -mtune=cortex-a9 \
 --prefix=/opt zlib \
 --with-zlib-lib=$DEST/lib \
 --with-zlib-include=$DEST/include
@@ -61,9 +61,9 @@ make CC=arm-linux-gcc install INSTALLTOP=$DEST OPENSSLDIR=$DEST/ssl
 ########### #################################################################
 
 mkdir $SRC/curses && cd $SRC/curses
-$WGET http://ftp.gnu.org/gnu/ncurses/ncurses-6.0.tar.gz
-tar zxvf ncurses-6.0.tar.gz
-cd ncurses-6.0
+$WGET http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
+tar zxvf ncurses-6.1.tar.gz
+cd ncurses-6.1
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS="-P $CPPFLAGS" \
@@ -75,6 +75,7 @@ $CONFIGURE \
 --with-normal \
 --with-shared \
 --enable-rpath \
+--disable-stripping \
 --with-fallbacks=xterm
 
 $MAKE
@@ -85,9 +86,9 @@ make install DESTDIR=$BASE
 ############### #############################################################
 
 mkdir $SRC/libreadline && cd $SRC/libreadline
-$WGET http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz
-tar zxvf readline-7.0.tar.gz
-cd readline-7.0
+$WGET http://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz
+tar zxvf readline-8.0.tar.gz
+cd readline-8.0
 
 $WGET https://raw.githubusercontent.com/lancethepants/tomatoware/master/patches/readline/readline.patch
 patch < readline.patch
