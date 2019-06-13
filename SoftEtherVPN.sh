@@ -11,7 +11,7 @@ WGET="wget --prefer-family=IPv4"
 DEST=$BASE/opt
 LDFLAGS="-L$DEST/lib"
 CPPFLAGS="-I$DEST/include"
-CFLAGS="-march=armv7-a -mtune=cortex-a9"
+CFLAGS="-O3 -march=armv7-a -mtune=cortex-a9"
 CXXFLAGS=$CFLAGS
 CONFIGURE="./configure --prefix=/opt --host=arm-linux"
 MAKE="make -j`nproc`"
@@ -44,9 +44,9 @@ make install DESTDIR=$BASE
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET https://www.openssl.org/source/openssl-1.1.1b.tar.gz
-tar zxvf openssl-1.1.1b.tar.gz
-cd openssl-1.1.1b
+$WGET https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+tar zxvf openssl-1.1.1c.tar.gz
+cd openssl-1.1.1c
 
 ./Configure no-shared linux-armv4 -march=armv7-a -mtune=cortex-a9 \
 --prefix=/opt zlib \
@@ -110,9 +110,9 @@ make install DESTDIR=$BASE
 ############ ################################################################
 
 mkdir $SRC/libiconv && cd $SRC/libiconv
-$WGET http://ftp.gnu.org/gnu/libiconv/libiconv-1.15.tar.gz
-tar zxvf libiconv-1.15.tar.gz
-cd libiconv-1.15
+$WGET http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
+tar zxvf libiconv-1.16.tar.gz
+cd libiconv-1.16
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
@@ -157,12 +157,12 @@ sed -i 's,-lncurses -lz,-lncursesw -lz -liconv -ldl,g' Makefile
 sed -i 's,ranlib,arm-linux-ranlib,g' Makefile
 
 CCFLAGS="$CPPFLAGS $CFLAGS" \
-LDFLAGS="-static $LDFLAGS" \
+LDFLAGS="-s -static $LDFLAGS" \
 $MAKE \
 || true
 
 cp ../SoftEtherVPN_host/tmp/hamcorebuilder ./tmp/
 
 CCFLAGS="$CPPFLAGS $CFLAGS" \
-LDFLAGS="-static $LDFLAGS" \
+LDFLAGS="-s -static $LDFLAGS" \
 $MAKE
