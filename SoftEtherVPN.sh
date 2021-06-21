@@ -3,17 +3,16 @@
 set -e
 set -x
 
-mkdir -p ~/softether && cd ~/softether
-
 BASE=`pwd`
-SRC=$BASE/src
+DEST=$BASE/out
+SRC=$DEST/src
+
 WGET="wget --prefer-family=IPv4"
-DEST=$BASE/opt
 LDFLAGS="-L$DEST/lib"
 CPPFLAGS="-I$DEST/include"
 CFLAGS="-O3 -march=armv7-a -mtune=cortex-a9"
 CXXFLAGS=$CFLAGS
-CONFIGURE="./configure --prefix=/opt --host=arm-linux"
+CONFIGURE="./configure --prefix=$DEST --host=arm-linux"
 MAKE="make -j`nproc`"
 
 mkdir -p $SRC
@@ -33,23 +32,23 @@ CFLAGS=$CFLAGS \
 CXXFLAGS=$CXXFLAGS \
 CROSS_PREFIX=arm-linux- \
 ./configure \
---prefix=/opt \
+--prefix=$DEST \
 --static
 
 $MAKE
-make install DESTDIR=$BASE
+make install
 
 ########### #################################################################
 # OPENSSL # #################################################################
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET https://www.openssl.org/source/openssl-1.1.1c.tar.gz
-tar zxvf openssl-1.1.1c.tar.gz
-cd openssl-1.1.1c
+$WGET https://www.openssl.org/source/openssl-1.1.1k.tar.gz
+tar zxvf openssl-1.1.1k.tar.gz
+cd openssl-1.1.1k
 
 ./Configure no-shared linux-armv4 -march=armv7-a -mtune=cortex-a9 \
---prefix=/opt zlib \
+--prefix=$DEST zlib \
 --with-zlib-lib=$DEST/lib \
 --with-zlib-include=$DEST/include
 
@@ -60,11 +59,29 @@ make CC=arm-linux-gcc install INSTALLTOP=$DEST OPENSSLDIR=$DEST/ssl
 # NCURSES # #################################################################
 ########### #################################################################
 
-mkdir $SRC/curses && cd $SRC/curses
-$WGET http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
-tar zxvf ncurses-6.1.tar.gz
-cd ncurses-6.1
+mkdir $SRC/ncurses && cd $SRC/ncurses
+$WGET http://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz
+tar zxvf ncurses-6.2.tar.gz
+cp -r ncurses-6.2 ncurses-6.2-native
 
+cd ncurses-6.2-native
+
+./configure \
+--prefix=$SRC/ncurses/ncurses-6.2-native/install \
+--without-cxx \
+--without-cxx-binding \
+--without-ada \
+--without-debug \
+--without-manpages \
+--without-profile \
+--without-tests \
+--without-curses-h
+$MAKE
+make install
+
+cd ../ncurses-6.2
+
+PATH=$SRC/ncurses/ncurses-6.2-native/install/bin:$PATH \
 LDFLAGS=$LDFLAGS \
 CPPFLAGS="-P $CPPFLAGS" \
 CFLAGS=$CFLAGS \
@@ -79,19 +96,20 @@ $CONFIGURE \
 --with-fallbacks=xterm
 
 $MAKE
-make install DESTDIR=$BASE
+make install
+
+ln -s libncursesw.a $DEST/lib/libncurses.a
 
 ############### #############################################################
 # LIBREADLINE # #############################################################
 ############### #############################################################
 
 mkdir $SRC/libreadline && cd $SRC/libreadline
-$WGET http://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz
-tar zxvf readline-8.0.tar.gz
-cd readline-8.0
+$WGET http://ftp.gnu.org/gnu/readline/readline-8.1.tar.gz
+tar zxvf readline-8.1.tar.gz
+cd readline-8.1
 
-$WGET https://raw.githubusercontent.com/lancethepants/tomatoware/master/patches/readline/readline.patch
-patch < readline.patch
+patch < $BASE/patches/readline.patch
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
@@ -103,37 +121,18 @@ bash_cv_wcwidth_broken=no \
 bash_cv_func_sigsetjmp=yes
 
 $MAKE
-make install DESTDIR=$BASE
-
-############ ################################################################
-# LIBICONV # ################################################################
-############ ################################################################
-
-mkdir $SRC/libiconv && cd $SRC/libiconv
-$WGET http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
-tar zxvf libiconv-1.16.tar.gz
-cd libiconv-1.16
-
-LDFLAGS=$LDFLAGS \
-CPPFLAGS=$CPPFLAGS \
-CFLAGS=$CFLAGS \
-CXXFLAGS=$CXXFLAGS \
-$CONFIGURE \
---enable-static \
---disable-shared
-
-$MAKE
-make install DESTDIR=$BASE
+make install
 
 ############# ###############################################################
 # SOFTETHER # ###############################################################
 ############# ###############################################################
 
 mkdir $SRC/softether && cd $SRC/softether
-git clone https://github.com/SoftEtherVPN/SoftEtherVPN_Stable.git
-mv SoftEtherVPN_Stable SoftEtherVPN
-
+wget https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/releases/download/v4.36-9754-beta/softether-src-v4.36-9754-beta.tar.gz
+tar zxvf softether-src-v4.36-9754-beta.tar.gz
+mv v4.36-9754 SoftEtherVPN
 cp -r SoftEtherVPN SoftEtherVPN_host
+
 cd SoftEtherVPN_host
 
 if [ "`uname -m`" == "x86_64" ];then
@@ -146,15 +145,9 @@ $MAKE
 
 cd ../SoftEtherVPN
 
-$WGET https://raw.githubusercontent.com/lancethepants/SoftEtherVPN-arm-static/master/patches/100-ccldflags.patch
-$WGET https://raw.githubusercontent.com/lancethepants/SoftEtherVPN-arm-static/master/patches/iconv.patch
-patch -p1 < 100-ccldflags.patch
-patch -p1 < iconv.patch
+patch -p1 < $BASE/patches/softethervpn.patch
 
 cp ./src/makefiles/linux_32bit.mak ./Makefile
-sed -i 's,#CC=gcc,CC=arm-linux-gcc,g' Makefile
-sed -i 's,-lncurses -lz,-lncursesw -lz -liconv -ldl,g' Makefile
-sed -i 's,ranlib,arm-linux-ranlib,g' Makefile
 
 CCFLAGS="$CPPFLAGS $CFLAGS" \
 LDFLAGS="-s -static $LDFLAGS" \
@@ -166,3 +159,6 @@ cp ../SoftEtherVPN_host/tmp/hamcorebuilder ./tmp/
 CCFLAGS="$CPPFLAGS $CFLAGS" \
 LDFLAGS="-s -static $LDFLAGS" \
 $MAKE
+
+cp $SRC/softether/SoftEtherVPN/bin/vpnserver/hamcore.se2 $BASE
+cp $SRC/softether/SoftEtherVPN/bin/*/vpn* $BASE

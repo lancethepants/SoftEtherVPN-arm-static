@@ -1,0 +1,45 @@
+diff -Naur SoftEtherVPN_orig/src/makefiles/linux_32bit.mak SoftEtherVPN/src/makefiles/linux_32bit.mak
+--- SoftEtherVPN_orig/src/makefiles/linux_32bit.mak	2021-06-16 13:00:45.566836190 -0600
++++ SoftEtherVPN/src/makefiles/linux_32bit.mak	2021-06-16 13:00:53.050891809 -0600
+@@ -60,15 +60,15 @@
+ 
+ # Variables
+ 
+-#CC=gcc
++CC=arm-linux-gcc
+ 
+-OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char
++OPTIONS_COMPILE_DEBUG=-D_DEBUG -DDEBUG -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -g -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_DEBUG=-g -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+-OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char
++OPTIONS_COMPILE_RELEASE=-DNDEBUG -DVPN_SPEED -DUNIX -DUNIX_LINUX -D_REENTRANT -DREENTRANT -D_THREAD_SAFE -D_THREADSAFE -DTHREAD_SAFE -DTHREADSAFE -D_FILE_OFFSET_BITS=64 -I./src/ -I./src/Cedar/ -I./src/Mayaqua/ -O2 -fsigned-char $(CCFLAGS)
+ 
+-OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz
++OPTIONS_LINK_RELEASE=-O2 -fsigned-char -lm -ldl -lrt -lpthread -lssl -lcrypto -lreadline -lncurses -lz $(LDFLAGS)
+ 
+ INSTALL_BINDIR=/usr/bin/
+ INSTALL_VPNSERVER_DIR=/usr/vpnserver/
+diff -Naur SoftEtherVPN_orig/src/Mayaqua/Internat.c SoftEtherVPN/src/Mayaqua/Internat.c
+--- SoftEtherVPN_orig/src/Mayaqua/Internat.c	2021-06-16 13:00:45.562836160 -0600
++++ SoftEtherVPN/src/Mayaqua/Internat.c	2021-06-16 13:01:12.371035386 -0600
+@@ -114,7 +114,7 @@
+ #include <Mayaqua/Mayaqua.h>
+ 
+ extern LOCK *token_lock;
+-static char charset[MAX_SIZE] = "EUCJP";
++static char charset[MAX_SIZE] = "utf-8";
+ static LOCK *iconv_lock = NULL;
+ void *iconv_cache_wide_to_str = 0;
+ void *iconv_cache_str_to_wide = 0;
+@@ -929,7 +929,7 @@
+ #ifdef	UNIX_MACOS
+ 		StrCpy(charset, sizeof(charset), "utf-8");
+ #else	// UNIX_MACOS
+-		StrCpy(charset, sizeof(charset), "EUCJP");
++		StrCpy(charset, sizeof(charset), "utf-8");
+ #endif	// UNIX_MACOS
+ 		d = IconvWideToStrInternal();
+ 		if (d == (void *)-1)
